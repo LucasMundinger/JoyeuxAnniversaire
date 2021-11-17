@@ -20,6 +20,12 @@
     }
     //end
     
+    function b64DecodeUnicode(str) {
+        // Going backwards: from bytestream, to percent-encoding, to original string.
+        return decodeURIComponent(atob(str).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    }
 
     const countDown = new Date("Nov 18, 2021 18:15:00").getTime(),
         x = setInterval(function() {    
@@ -32,27 +38,34 @@
   
           //do something later when date is reached
           if (distance < 0) {
-            document.getElementById("headline").innerText = "It's my birthday!";
             document.getElementById("countdown").style.display = "none";
-            document.getElementById("content").style.display = "block";
+            document.getElementById("firstline").style.display = "none";
             clearInterval(x);
           }
-          if (distance < 25200000) {
-            document.getElementById("data").style.display = "block";
-            document.getElementById("datatxt").innerText ="Bonne journée"
+          else if (distance < 25200000){
+            document.getElementById("countdown").style.display = "block";
+            document.getElementById("firstline").style.display = "block"; 
           }
-          if (distance < 18000000) {
-            document.getElementById("data").style.display = "block";
-            document.getElementById("datatxt").innerText ="Hâte d'être à ce soir"
-          }
-          if (distance < 10800000) {
-            document.getElementById("data").style.display = "block";
-            document.getElementById("datatxt").innerText ="48.918686N, 2.362283E"
-          }
+
           if (distance < 3600000) {
             document.getElementById("data").style.display = "block";
-            document.getElementById("datatxt").innerText ="rejoins moi ici à la fin du timer : 48.918686N, 2.362283E"
+            document.getElementById("datatxt").innerText =b64DecodeUnicode("cmVqb2lucyBtb2kgaWNpIMOgIGxhIGZpbiBkdSB0aW1lciA6IDQ4LjkxODY4Nk4sIDIuMzYyMjgzRQ==")
           }
+          else if (distance < 10800000) {
+            document.getElementById("data").style.display = "block";
+            document.getElementById("datatxt").innerText =b64DecodeUnicode("IjQ4LjkxODY4Nk4sIDIuMzYyMjgzRSI=")
+          }
+          else if (distance < 18000000) {
+            document.getElementById("data").style.display = "block";
+            document.getElementById("datatxt").innerText =b64DecodeUnicode("SMOidGUgZCfDqnRyZSDDoCBjZSBzb2ly")
+          }
+          else if (distance < 25200000) {
+            document.getElementById("data").style.display = "block";
+            document.getElementById("datatxt").innerText = b64DecodeUnicode("Qm9ubmUgam91cm7DqWU=")
+          }
+          
+          
+          
           //seconds
         }, 0)
     }());

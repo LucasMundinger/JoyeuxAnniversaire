@@ -63,6 +63,14 @@ li span {
   display:none
 }
 
+#countdown{
+  display:none;
+}
+
+#firstline{
+  display:none;
+}
+
 .emoji span {
   font-size: 4rem;
   padding: 0 .5rem;
