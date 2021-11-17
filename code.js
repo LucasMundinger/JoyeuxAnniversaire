@@ -37,6 +37,10 @@
             document.getElementById("content").style.display = "block";
             clearInterval(x);
           }
+          if (distance < 25200000) {
+            document.getElementById("data").style.display = "block";
+            document.getElementById("datatxt").innerText ="Bonne journée"
+          }
           if (distance < 18000000) {
             document.getElementById("data").style.display = "block";
             document.getElementById("datatxt").innerText ="Hâte d'être à ce soir"
